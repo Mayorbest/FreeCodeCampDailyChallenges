@@ -19,81 +19,22 @@ Waiting:3. detectAI("Yes - you're right! I made a mistake there - let me try aga
 Waiting:4. detectAI("The extraordinary students were studying vivaciously.") should return "AI".
 Waiting:5. detectAI("The (excited) student was (coding) in the library.") should return "AI".
 
-    research answers found
-  let paragraph = "This is the first sentence. And this is the second! Is this the third?";
-let sentences = paragraph.split(/(?<=[.!?])\s//); // Splits by . ! ? followed by optional space
 
-/*for (let sentence of sentences) {
-    console.log(sentence.trim()); // Outputs each sentence, trimmed
-}
-
-// Or using forEach
-sentences.forEach((sentence, index) => {
-    console.log(`Sentence ${index + 1}: ${sentence.trim()}`);
-});
-
-2. Looping through Words:
-To iterate over individual words, you can split the string into an array of words and then loop through the array:
-JavaScript
-
-let sentence = "This is a sample sentence.";
-let words = sentence.split(' '); // Splits by space
-for (let word of words) {
-    console.log(word); // Outputs each word
-}
-For more robust word splitting, especially when dealing with punctuation, you might use a regular expression with match():
-JavaScript
-
-let sentence = "Hello, world! How are you?";
-let words = sentence.match(/\b\w+\b/g); // Matches whole words
-if (words) {
-    for (let word of words) {
-        console.log(word); // Outputs words without punctuation
-    }
-}
-    1. Looping through Characters (Text):
-To iterate over individual characters within a string, you can use: for loop.
-JavaScript
-
-    let text = "Hello";
-    for (let i = 0; i < text.length; i++) {
-        console.log(text[i]); // Outputs each character
-    }
-for...of loop.
-JavaScript
-
-    let text = "Hello";
-    for (let char of text) {
-        console.log(char); // Outputs each character
-    }
-split('') and forEach().
-JavaScript
-
-    let text = "Hello";
-    text.split('').forEach(char => {
-        console.log(char); // Outputs each character
-    });
  */
 
 function detectiveAI (text) {
   let textLen = text.split(' ') //this splits the sentence in to words
-  textLen = textLen.split("")
-  let word = [];
-  textLen.forEach(char => {
-    word.push(char);
-    word.forEach((letter, i) => {
-        if(word[i]  === '(' && word[i] === word[i]){text = "AI"}
-        else if(word[i]  === ')' && word[i] === word[i]){text = "AI"}
-        else if(word[i]  === '-' && word[i] === word[i]){text = "AI"}
-        else if (word.length >= 7){text = "AI"} else{ text = 'Human'}
-        console.log(word)
-    });
-  });
+
+  if(text.includes('((') || text.includes('))') || text.includes('--')){text = "AI"}
+  textLen.forEach(word => {
+    if(word.length >= 7) { text = 'AI'}
+    else{ text = 'Human'}
+        });
   return text;
 }
 
 console.log( detectiveAI("The quick brown fox jumped over the lazy dog.")) //should return "Human".
-//console.log( detectiveAI("The hypersonic brown fox - jumped (over) the lazy dog.")) //should return "Human".
-//console.log( detectiveAI("Yes - you're right! I made a mistake there - let me try again.")) //should return "AI".
-//console.log( detectiveAI("The extraordinary students were studying vivaciously.")) //should return "AI".
-//console.log( detectiveAI("The (excited) student was (coding) in the library.")) //should return "AI".
+console.log( detectiveAI("The hypersonic brown fox - jumped (over) the lazy dog.")) //should return "Human".
+console.log( detectiveAI("Yes - you're right! I made a mistake there - let me try again.")) //should return "AI".
+console.log( detectiveAI("The extraordinary students were studying vivaciously.")) //should return "AI".
+console.log( detectiveAI("The (excited) student was (coding) in the library.")) //should return "AI".
