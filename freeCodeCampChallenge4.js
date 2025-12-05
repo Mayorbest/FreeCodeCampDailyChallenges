@@ -20,9 +20,30 @@ Waiting:4. convertListItem("2. list item text") should return "<li>list item tex
 Waiting:5. convertListItem(". invalid again") should return "Invalid format".
 Waiting:6. convertListItem("A. last invalid") should return "Invalid format".
  */
+//let sentence = "Hello, world! How are you?";
+//let words = sentence.match(/\b\w+\b/g); // Matches whole words
+//(/(?<=[.!?])\s/); // Splits by . ! ? followed by optional space
+
 
 function convertListItem(markedItems) {
+  let items;
+  let num;
   let lists = markedItems.split(' ');
-  let num = Number(lists);
-  if (num && !num ) { markedItems = "l"}
-}
+  lists.forEach((item, index) => {
+    item = `${item.trim()} `;
+    items += item
+    markedItems =items
+  })
+  /*let Num= lists[0];
+  let num = Number(Num);
+  if (num && Num.includes('.')) { markedItems = "<li>".concat(item,'</li>')}
+  else {markedItems = 'Invalid format'}*/
+  return markedItems;
+};
+
+console.log(convertListItem("1. My item"));
+console.log(convertListItem(" 1.  Another item"));
+console.log(convertListItem("1 . invalid item"));
+console.log(convertListItem("2. list item text"));
+console.log(convertListItem(". invalid again"));
+console.log(convertListItem("A. last invalid"));
