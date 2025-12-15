@@ -18,5 +18,20 @@ Waiting:6. speedCheck(88, 40) should return "Ticket".
  */
 
 function speedCheck (speedMph,SpeedLtdKph) {
+    speedMph = speedMph * 1.60934;
+    if(speedMph < SpeedLtdKph) {
+        speedMph = 'Not speeding'
+    } else if (speedMph <= (SpeedLtdKph-5)) {
+        speedMph = 'Warning'
+    }else if (speedMph >= (SpeedLtdKph + 5)) {
+        speedMph = 'Ticket'
+    }
     return speedMph;
 }
+
+console.log(speedCheck(30, 70));
+console.log(speedCheck(40, 60));
+console.log(speedCheck(40, 65));
+console.log(speedCheck(60, 90));
+console.log(speedCheck(65, 100));
+console.log(speedCheck(88, 40));
